@@ -6,10 +6,23 @@ const eqObjects = function(object1, object2) {
 
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);
-  if (keys1.length === keys2.length) {
-    return true;
+  if (keys1.length === keys2.length) {  // check if length of objects is the same
+    for (let key in object1) {  // for every key in first object
+      
+      if (key in object2) {  // if that key is in object2 as well
+        
+        if (object1[key] !== object2[key]) {  // value of key is not same in both objects
+          
+          return false;
+        }
+      } else {
+        return false;  // if key is not in both objects
+      }
+    }
+    return true;  // if go through the object and everything is matching
+    
   } else {
-    return false;
+    return false; // if length is not the same
   }
  
 };
