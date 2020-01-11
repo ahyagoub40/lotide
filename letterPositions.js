@@ -42,17 +42,32 @@ const flatten = function(arrayOfArrays) {
   return flattened;
 };
 
-
+// init and fill the count object. the keys will be the letters, the values will be the number of occurances
 
 const letterPositions = function(sentence) {
-  let indeciesOfLetters = {};  // init an object
+  let indiciesOfLetters = {};
+  
+  
+  for (let i = 0; i < sentence.length; i++) {
+    const letter = sentence[i];
 
+    if (letter !== " ") {
+      
+      if (letter in indiciesOfLetters) {
+        indiciesOfLetters[letter].push(i);
+        
+      } else {
+        indiciesOfLetters[letter] = [i];
+      }
+    }
+  }
+  
 
-
-  return indeciesOfLetters; // object of arrays
+  console.log(indiciesOfLetters);
+  return indiciesOfLetters;
 };
-const resultedObject = letterPositions('hello');
-const ValueOfIndecies = Object.values(resultedObject);
-const arrayOfIndecies = flatten(ValueOfIndecies);
-
+const resultedObject = letterPositions('hello'); // call the function, returns an object
+const ValueOfIndecies = Object.values(resultedObject); // get the values of the object which is an array of arrays
+const arrayOfIndecies = flatten(ValueOfIndecies); // flatten the array of arrays
+// check if the arrays are equal
 assertArraysEqual(arrayOfIndecies, [0, 1, 2, 3, 4]);
